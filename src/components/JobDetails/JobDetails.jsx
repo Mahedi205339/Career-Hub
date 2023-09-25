@@ -1,7 +1,9 @@
 import { useLoaderData, useParams } from "react-router-dom";
 import { MdOutlineLocationOn, MdWork } from "react-icons/md"
 import { AiOutlineDollar, AiOutlinePhone ,AiOutlineMail} from "react-icons/ai"
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { saveJobApplication } from "../../Utility/localstorage";
 
 
 
@@ -11,6 +13,12 @@ const JobDetails = () => {
     const idInt = parseInt(id)
     const job = jobs.find(job => job.id === idInt)
     console.log(job)
+
+const handleApplyJob = () =>{
+    saveJobApplication(idInt)
+    toast('You have applied successfully')
+}
+
     return (
         <div>
             <h2 className="text-xl md:text-2xl lg:text-4xl font-semibold text-center my-3 md:my-6 lg:mb-32">Job Details of: {job.job_title}</h2>
@@ -52,9 +60,10 @@ const JobDetails = () => {
                         <MdOutlineLocationOn className="text-[#6678f2]"></MdOutlineLocationOn>
                         <span className="font-bold text-black">Address:</span>{job.contact_information.address.slice(0,22)}
                     </div>
-                    <button className="w-full mt-2 lg:mt-10 bg-[#7E90FE] py-2 text-white rounded">Apply Now</button>
+                    <button onClick={handleApplyJob} className="w-full mt-2 lg:mt-10 bg-[#7E90FE] py-2 text-white rounded">Apply Now</button>
 
                 </div>
+                <ToastContainer></ToastContainer>
             </div>
         </div>
     );

@@ -7,9 +7,9 @@ import {
 } from "react-router-dom";
 import Root from './components/root/root';
 import Home from './components/Home/Home';
-import Appliedjobs from './components/Appliedjobs/Appliedjobs';
 import ErrorPage from './components/Errorpege/ErrorPage';
 import JobDetails from './components/JobDetails/JobDetails';
+import AppliedJobs from './components/Appliedjobs/Appliedjobs';
 
 const router = createBrowserRouter([
   {
@@ -23,12 +23,14 @@ const router = createBrowserRouter([
       },
       {
         path:'/applied',
-        element: <Appliedjobs></Appliedjobs>
+        element: <AppliedJobs></AppliedJobs>,
+        loader: () =>fetch('/jobs.json')
+
       },
       {
         path: '/job/:id',
         element: <JobDetails></JobDetails>,
-        loader:() =>fetch('../jobs.json')
+        loader:() =>fetch('/jobs.json')
       }
     ]
   },
